@@ -5,6 +5,12 @@ public class GameLogic {
     public static AbstractPlayer playerOne;
     public static AbstractPlayer playerTwo;
 
+
+    public static void createPlayers() {
+        createPlayerOne();
+        createPlayerTwo();
+    }
+
     public static void createPlayerOne() {
         Scanner scannerInput = new Scanner(System.in);
         // ask if player one is human
@@ -51,45 +57,17 @@ public class GameLogic {
         }
     }
 
-    public static void takeTurn(String player) {
-        Scanner scannerInput = new Scanner(System.in);
-
-        if (Objects.equals(player, "playerOne")) {
-            if (playerOne instanceof HumanPlayer) {
-                System.out.println(playerOne.returnName() + " it's your turn!");
-                System.out.println("Choose your move ('rock', 'scissors', or 'paper'): ");
-                String playerMove = scannerInput.nextLine();
-                ((HumanPlayer) playerOne).setMove(playerMove);
-            } else if (playerOne instanceof ComputerPlayer) {
-                ((ComputerPlayer) playerOne).chooseRandomMove();
-            }
-        } else if (Objects.equals(player, "playerTwo")) {
-            if (playerTwo instanceof HumanPlayer) {
-                System.out.println(playerTwo.returnName() + " it's your turn!");
-                System.out.println("Choose your move ('rock', 'scissors', or 'paper'): ");
-                String playerMove = scannerInput.nextLine();
-                ((HumanPlayer) playerTwo).setMove(playerMove);
-            } else if (playerTwo instanceof ComputerPlayer) {
-                ((ComputerPlayer) playerTwo).chooseRandomMove();
-            }
-        }
-    }
-
     public static void showPlayerMoves() {
         System.out.println(playerOne.returnName() + " chose to use " + playerOne.returnMove());
         System.out.println(playerTwo.returnName() + " chose to use " + playerTwo.returnMove());
     }
 
-    public static void showOutcome() {
-        Move playerOneMove = playerOne.returnMove();
-        Move playerTwoMove = playerTwo.returnMove();
-
-        if (playerOneMove == playerTwoMove) {
-            System.out.println("it's a draw!");
-        } else if (playerOneMove == Move.ROCK && playerTwoMove == Move.SCISSORS || playerOneMove == Move.PAPER && playerTwoMove == Move.ROCK || playerOneMove == Move.SCISSORS && playerTwoMove == Move.PAPER) {
-            System.out.println(playerOne.returnName() + " wins!");
-        } else {
-            System.out.println(playerTwo.returnName() + " wins!");
-        }
+    public static void welcomeMessage() {
+        System.out.println("Welcome to Rock, Scissors, Paper!");
     }
+
+    public static void goodbyeMessage() {
+        System.out.println("Thanks for playing!");
+    }
+
 }
